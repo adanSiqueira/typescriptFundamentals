@@ -76,6 +76,33 @@ class Cat {
     }
 }
 
+// =======================================================
+// Custom Type Guard Function
+// =======================================================
+//
+// This is a USER-DEFINED type guard.
+// The return type `animal is Dog` tells TypeScript:
+//
+//  "If this function returns true,
+//    then `animal` should be treated as a Dog."
+
+function isDog(animal: Dog | Cat): animal is Dog {
+
+    // We are performing a runtime check by asserting
+    // that `animal` might be a Dog and testing for a
+    // property that ONLY Dog has (`lastName`).
+    //
+    // If `lastName` exists, we assume the object is a Dog.
+    //
+    // NOTE:
+    // - This is safe only if `lastName` is unique to Dog
+    // - The check runs at runtime
+    // - The return type informs the TypeScript compiler
+
+    return (animal as Dog).lastName !== undefined;
+}
+
+
 
 // Function receives a UNION of class types
 function getName(animal: Dog | Cat) {
